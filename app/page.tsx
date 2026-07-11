@@ -1,116 +1,7 @@
 import Image from "next/image";
+import Link from "next/link";
 import ProgressGauge from "./components/ProgressGauge";
-
-type Project = {
-  name: string;
-  status: string;
-  statusColor: string;
-  icon: string | null;
-  description: string;
-  progress: number;
-  tech: string[];
-  links: { label: string; href: string }[];
-  history?: { date: string; text: string }[];
-};
-
-const projects: Project[] = [
-  {
-    name: "Typedex",
-    status: "公開中",
-    statusColor: "bg-green-500/15 text-green-600 dark:text-green-400",
-    icon: "/icons/typedex.png",
-    description:
-      "性格タイプで友達を「集めて」相性を分析できる、中高生向けのiOSアプリ。企画・デザイン・開発・App Store申請までを一人で担当。",
-    progress: 100,
-    tech: ["React Native", "Expo", "TypeScript"],
-    links: [
-      {
-        label: "App Store",
-        href: "https://apps.apple.com/jp/app/id6781932071",
-      },
-    ],
-  },
-  {
-    name: "RINGDOM",
-    status: "v2 開発中",
-    statusColor: "bg-amber-500/15 text-amber-600 dark:text-amber-400",
-    icon: "/icons/ringdom.png",
-    description:
-      "ポーカーの判断ミスをAIが添削する上達ログ。プレイしたハンドを記録するとAIコーチが評価し、記録が貯まるほど自分の弱点（リーク）が見えてくる。",
-    progress: 70,
-    tech: ["React Native", "Expo", "TypeScript", "Claude API"],
-    links: [{ label: "Webアプリ (v1)", href: "https://ringdom.vercel.app" }],
-    history: [
-      {
-        date: "v1",
-        text: "Web技術（Capacitor）でWeb / iOS / Androidの3プラットフォーム対応版を開発。Web版を公開（現在も稼働中）。",
-      },
-      {
-        date: "2026.06-07",
-        text: "iOS App Storeの審査に挑戦するも却下。Webをラップした構成がネイティブアプリとしての品質基準に届かなかった。",
-      },
-      {
-        date: "2026.07-",
-        text: "却下を機に方針転換し、React Nativeでゼロから再構築するv2が爆誕。AIコーチ機能を一新して実機テストまで完了、ストア公開へ再挑戦中。",
-      },
-    ],
-  },
-  {
-    name: "ヤブサメ",
-    status: "公開準備中",
-    statusColor: "bg-blue-500/15 text-blue-600 dark:text-blue-400",
-    icon: null,
-    description:
-      "競馬WIN5の買い目を人気合計・人気帯の条件で絞り込むフィルターツール。フリーミアム型のWebアプリとして公開準備中。",
-    progress: 80,
-    tech: ["Next.js", "React", "Tailwind CSS", "TypeScript"],
-    links: [],
-  },
-  {
-    name: "kakeibo",
-    status: "非公開運用中",
-    statusColor: "bg-purple-500/15 text-purple-600 dark:text-purple-400",
-    icon: "/icons/kakeibo.png",
-    description:
-      "パートナーと二人で使う共有家計簿アプリ。レシートを撮影するとClaude APIが品目と金額を自動で読み取って記帳する。自分たちで毎日使いながら改善を続けている。",
-    progress: 90,
-    tech: ["React Native", "Expo", "Supabase", "Claude API"],
-    links: [],
-  },
-  {
-    name: "Slash Rush",
-    status: "開発中",
-    statusColor: "bg-amber-500/15 text-amber-600 dark:text-amber-400",
-    icon: null,
-    description:
-      "画面をスラッシュして蛇を切断していく60秒の2Dアクションゲーム。Canvasベースで、短時間で遊べる暇つぶしゲームとして開発中。",
-    progress: 40,
-    tech: ["TypeScript", "Canvas 2D"],
-    links: [],
-  },
-  {
-    name: "エイショット",
-    status: "構想中",
-    statusColor: "bg-zinc-500/15 text-zinc-600 dark:text-zinc-400",
-    icon: null,
-    description:
-      "「遺影 × ショット」の造語。堅苦しくなりがちな遺影を、元気なうちにカジュアルに撮って家族と共有できるサービスの構想。",
-    progress: 15,
-    tech: ["企画段階"],
-    links: [],
-  },
-  {
-    name: "筋トレアプリ（仮）",
-    status: "構想中",
-    statusColor: "bg-zinc-500/15 text-zinc-600 dark:text-zinc-400",
-    icon: null,
-    description:
-      "トレーニングメニューの自動生成に加えて、部位ごとの超回復・放置状態を人体マップの色（赤→緑→青）で直感的に可視化するアプリの構想。",
-    progress: 10,
-    tech: ["企画段階"],
-    links: [],
-  },
-];
+import { projects } from "./lib/projects";
 
 const skillGroups = [
   {
@@ -195,14 +86,19 @@ export default function Home() {
           プロジェクト
         </h2>
         <p className="mb-8 text-sm text-muted">
-          公開済みのものから構想段階のものまで、個人開発の全プロジェクト。
+          公開済みのものから構想段階のものまで、個人開発の全プロジェクト。カードを押すと詳細が見られます。
         </p>
         <div className="space-y-5">
           {projects.map((project) => (
             <article
-              key={project.name}
-              className="rounded-xl border border-line bg-card p-6"
+              key={project.slug}
+              className="group relative rounded-xl border border-line bg-card p-6 transition-colors hover:border-accent"
             >
+              <Link
+                href={`/projects/${project.slug}`}
+                className="absolute inset-0 z-10 rounded-xl"
+                aria-label={`${project.name}の詳細ページへ`}
+              />
               <div className="mb-3 flex items-center gap-4">
                 {project.icon ? (
                   <Image
@@ -230,21 +126,6 @@ export default function Home() {
               <p className="mb-4 text-sm leading-relaxed text-muted">
                 {project.description}
               </p>
-              {project.history && (
-                <ol className="mb-5 space-y-3 border-l-2 border-line pl-4">
-                  {project.history.map((item) => (
-                    <li key={item.date} className="relative">
-                      <span className="absolute -left-[21.5px] top-1.5 h-2 w-2 rounded-full bg-accent" />
-                      <p className="text-xs font-semibold text-accent">
-                        {item.date}
-                      </p>
-                      <p className="mt-0.5 text-sm leading-relaxed text-muted">
-                        {item.text}
-                      </p>
-                    </li>
-                  ))}
-                </ol>
-              )}
               <div className="mb-4">
                 <ProgressGauge value={project.progress} />
               </div>
@@ -258,21 +139,24 @@ export default function Home() {
                   </span>
                 ))}
               </div>
-              {project.links.length > 0 && (
-                <div className="mt-4 flex flex-wrap gap-4">
+              <div className="mt-4 flex flex-wrap items-center justify-between gap-4">
+                <div className="flex flex-wrap gap-4">
                   {project.links.map((link) => (
                     <a
                       key={link.href}
                       href={link.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-sm font-medium text-accent underline-offset-4 hover:underline"
+                      className="relative z-20 text-sm font-medium text-accent underline-offset-4 hover:underline"
                     >
                       {link.label} →
                     </a>
                   ))}
                 </div>
-              )}
+                <span className="ml-auto text-sm font-medium text-muted transition-colors group-hover:text-accent">
+                  詳細を見る →
+                </span>
+              </div>
             </article>
           ))}
         </div>
