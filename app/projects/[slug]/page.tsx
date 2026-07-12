@@ -77,6 +77,11 @@ export default async function ProjectPage({ params }: Props) {
           </div>
         </div>
         <p className="mt-6 leading-relaxed text-muted">{project.description}</p>
+        {project.disclaimer && (
+          <p className="mt-3 text-xs leading-relaxed text-muted/80">
+            {project.disclaimer}
+          </p>
+        )}
         <div className="mt-6">
           <ProgressGauge value={project.progress} />
         </div>

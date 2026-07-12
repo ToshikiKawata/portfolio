@@ -15,6 +15,7 @@ export type Project = {
   progress: number;
   tech: string[];
   links: { label: string; href: string }[];
+  disclaimer?: string;
   history?: { date: string; text: string }[];
   features?: string[];
   stackDetail?: { title: string; items: string[] }[];
@@ -30,7 +31,7 @@ export const projects: Project[] = [
     statusColor: "bg-green-500/15 text-green-600 dark:text-green-400",
     icon: "/icons/typedex.png",
     description:
-      "性格タイプで友達を「集めて」相性を分析できる、中高生向けのiOSアプリ。企画・デザイン・開発・App Store申請までを一人で担当。",
+      "いわゆるMBTI系の16タイプ性格分類で友達を「集めて」相性を分析できる、中高生向けのiOSアプリ。企画・デザイン・開発・App Store申請までを一人で担当。",
     progress: 100,
     tech: ["React Native", "Expo", "TypeScript"],
     links: [
@@ -39,8 +40,10 @@ export const projects: Project[] = [
         href: "https://apps.apple.com/jp/app/id6781932071",
       },
     ],
+    disclaimer:
+      "※MBTIは関連団体の登録商標です。Typedexは独自の16タイプ分類を用いた非公式アプリで、公式のMBTI検査とは関係ありません。",
     features: [
-      "16の性格タイプで友達を図鑑にコレクション（4×4グリッド・コンプリート演出つき）",
+      "16の性格タイプ（MBTI系の4文字コード）で友達を図鑑にコレクション（4×4グリッド・コンプリート演出つき）",
       "自分と友達のタイプから相性を分析",
       "図鑑スナップ・相性・自分カードの3種類のシェア画像を生成",
       "LINE連携で友達追加と機種変更時のデータ引き継ぎ",
