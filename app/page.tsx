@@ -81,7 +81,7 @@ export default function Home() {
       </section>
 
       {/* Projects */}
-      <section className="mb-20">
+      <section id="projects" className="mb-20">
         <h2 className="mb-2 text-2xl font-bold tracking-tight">
           プロジェクト
         </h2>
@@ -160,6 +160,31 @@ export default function Home() {
             </article>
           ))}
         </div>
+      </section>
+
+      {/* Web制作の案内 */}
+      <section className="mb-20">
+        <Link
+          href="/services"
+          className="group block rounded-2xl border border-line bg-gradient-to-br from-accent-soft to-card p-8 transition-colors hover:border-accent"
+        >
+          <p className="text-xs font-semibold tracking-wide text-accent">
+            SERVICE
+          </p>
+          <h2 className="mt-2 text-xl font-bold tracking-tight sm:text-2xl">
+            LP・ホームページ制作、承ります
+          </h2>
+          <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted">
+            個人店舗・スモールビジネス向けに、企画からデザイン・公開まで一人で担当します。
+            デザインサンプルと料金の目安はこちら。
+          </p>
+          <span className="mt-4 inline-block text-sm font-medium text-accent">
+            詳しく見る{" "}
+            <span className="inline-block transition-transform group-hover:translate-x-1">
+              →
+            </span>
+          </span>
+        </Link>
       </section>
 
       {/* Contact */}
