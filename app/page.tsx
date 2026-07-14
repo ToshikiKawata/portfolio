@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import ProgressGauge from "./components/ProgressGauge";
+import { articles } from "./lib/articles";
 import { projects } from "./lib/projects";
 
 const skillGroups = [
@@ -161,6 +162,38 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      {/* 発信（記事が1件以上あるときだけ表示） */}
+      {articles.length > 0 && (
+        <section className="mb-20">
+          <h2 className="mb-2 text-2xl font-bold tracking-tight">発信</h2>
+          <p className="mb-8 text-sm text-muted">
+            個人開発で得た知見やストーリーを記事にしています。
+          </p>
+          <ul className="space-y-3">
+            {articles.map((article) => (
+              <li key={article.url}>
+                <a
+                  href={article.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex flex-wrap items-baseline gap-x-3 gap-y-1 rounded-xl border border-line bg-card p-4 transition-colors hover:border-accent"
+                >
+                  <span className="rounded-md bg-accent-soft px-2 py-0.5 text-xs font-medium text-accent">
+                    {article.platform}
+                  </span>
+                  <span className="text-sm font-medium group-hover:text-accent">
+                    {article.title}
+                  </span>
+                  <span className="ml-auto text-xs text-muted">
+                    {article.date}
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       {/* Web制作の案内 */}
       <section className="mb-20">
