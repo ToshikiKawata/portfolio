@@ -290,6 +290,26 @@ export default function ServicesPage() {
             </p>
           </div>
         </div>
+
+        {/* フルサイズサンプルへの導線 */}
+        <Link
+          href="/samples/taskflow"
+          className="group mt-8 block rounded-2xl border border-line bg-gradient-to-br from-[#0e1330] to-[#1b2350] p-7 text-center transition-transform hover:-translate-y-0.5"
+        >
+          <p className="text-xs font-bold tracking-[0.25em] text-[#7c9bff]">
+            FULL SAMPLE
+          </p>
+          <p className="mt-2 text-lg font-bold text-white sm:text-xl">
+            「TaskFlow」のフルサイズLPサンプルを見る
+          </p>
+          <p className="mx-auto mt-2 max-w-md text-xs leading-relaxed text-[#a5aed4]">
+            上のモックアップを、スクロール演出・料金表・FAQまで備えた
+            本物の1ページに仕上げたデモです。実際の納品イメージがつかめます。
+          </p>
+          <span className="mt-4 inline-block rounded-lg bg-gradient-to-r from-[#5b7cfa] to-[#8f6bf6] px-6 py-2.5 text-xs font-bold text-white transition-transform group-hover:scale-105">
+            サンプルLPを開く →
+          </span>
+        </Link>
       </section>
 
       {/* 強み */}
