@@ -15,6 +15,7 @@ export type Project = {
   progress: number;
   tech: string[];
   links: { label: string; href: string }[];
+  ended?: boolean; // 開発終了したプロジェクト（ゲージのアニメーションを止める）
   disclaimer?: string;
   history?: { date: string; text: string }[];
   features?: string[];
@@ -110,12 +111,13 @@ export const projects: Project[] = [
   {
     slug: "ringdom",
     name: "RINGDOM",
-    status: "v2 開発中",
-    statusColor: "bg-amber-500/15 text-amber-600 dark:text-amber-400",
+    status: "開発終了",
+    statusColor: "bg-zinc-500/15 text-zinc-600 dark:text-zinc-400",
     icon: "/icons/ringdom.png",
     description:
-      "ポーカーの判断ミスをAIが添削する上達ログ。プレイしたハンドを記録するとAIコーチが評価し、記録が貯まるほど自分の弱点（リーク）が見えてくる。",
+      "ポーカーの判断ミスをAIが添削する上達ログ。プレイしたハンドを記録するとAIコーチが評価し、記録が貯まるほど自分の弱点（リーク）が見えてくる。2度のiOS審査却下を経て開発終了（Web版は公開中）。",
     progress: 70,
+    ended: true,
     tech: ["React Native", "Expo", "TypeScript", "Claude API"],
     links: [{ label: "Webアプリ (v1)", href: "https://ringdom.vercel.app" }],
     features: [
@@ -180,8 +182,12 @@ export const projects: Project[] = [
         text: "iOS App Storeの審査に挑戦するも却下。Webをラップした構成がネイティブアプリとしての品質基準に届かなかった。",
       },
       {
-        date: "2026.07-",
-        text: "却下を機に方針転換し、React Nativeでゼロから再構築するv2が爆誕。AIコーチ機能を一新して実機テストまで完了、ストア公開へ再挑戦中。",
+        date: "2026.07",
+        text: "却下を機に方針転換し、React Nativeでゼロから再構築するv2が爆誕。AIコーチ機能を一新し、実機テストまで完了。",
+      },
+      {
+        date: "2026.07.19",
+        text: "v2で再挑戦するも、iOS審査で再び却下。再々提出はリスクが上回ると判断し、開発終了を決断（Web版v1は公開したまま）。ネイティブ再構築・サーバー側AI連携・レート制限設計の経験は次のプロジェクトに引き継ぐ。",
       },
     ],
   },

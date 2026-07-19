@@ -128,7 +128,10 @@ export default function Home() {
                 {project.description}
               </p>
               <div className="mb-4">
-                <ProgressGauge value={project.progress} />
+                <ProgressGauge
+                  value={project.progress}
+                  active={!project.ended}
+                />
               </div>
               <div className="flex flex-wrap items-center gap-2">
                 {project.tech.map((t) => (

@@ -4,9 +4,10 @@ import { useEffect, useRef, useState } from "react";
 
 type Props = {
   value: number; // 0-100
+  active?: boolean; // false = 開発終了などで進行していない（ストライプを止めてグレー表示）
 };
 
-export default function ProgressGauge({ value }: Props) {
+export default function ProgressGauge({ value, active = true }: Props) {
   const ref = useRef<HTMLDivElement>(null);
   const [started, setStarted] = useState(false);
   const [displayValue, setDisplayValue] = useState(0);
@@ -67,18 +68,24 @@ export default function ProgressGauge({ value }: Props) {
           className={`relative h-full rounded-full transition-[width] duration-1000 ease-out ${
             complete
               ? "bg-gradient-to-r from-emerald-500 to-green-400"
-              : "bg-gradient-to-r from-accent to-violet-500"
+              : active
+                ? "bg-gradient-to-r from-accent to-violet-500"
+                : "bg-gradient-to-r from-zinc-500 to-zinc-400"
           }`}
           style={{ width: started ? `${value}%` : "0%" }}
         >
-          {!complete && (
+          {!complete && active && (
             <div className="gauge-stripes absolute inset-0 opacity-40" />
           )}
         </div>
       </div>
       <span
         className={`w-12 shrink-0 text-right font-mono text-sm font-bold tabular-nums ${
-          complete ? "text-green-500 dark:text-green-400" : "text-accent"
+          complete
+            ? "text-green-500 dark:text-green-400"
+            : active
+              ? "text-accent"
+              : "text-muted"
         }`}
       >
         {displayValue}%

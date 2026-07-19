@@ -83,7 +83,7 @@ export default async function ProjectPage({ params }: Props) {
           </p>
         )}
         <div className="mt-6">
-          <ProgressGauge value={project.progress} />
+          <ProgressGauge value={project.progress} active={!project.ended} />
         </div>
         {project.links.length > 0 && (
           <div className="mt-6 flex flex-wrap gap-3">
