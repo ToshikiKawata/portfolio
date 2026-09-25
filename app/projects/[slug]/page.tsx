@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, ResolvingMetadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -12,13 +12,26 @@ export function generateStaticParams() {
   return projects.map((project) => ({ slug: project.slug }));
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
   const { slug } = await params;
   const project = getProject(slug);
   if (!project) return {};
+  const title = `${project.name} | Toshiki Kawata Portfolio`;
+  // openGraphは親と浅くマージされる＝丸ごと置き換わるため、
+  // 親の設定（プレビュー画像・サイト名など）を引き継いでから上書きする
+  const parentOpenGraph = (await parent).openGraph;
   return {
-    title: `${project.name} | Toshiki Kawata Portfolio`,
+    title,
     description: project.description,
+    openGraph: {
+      ...parentOpenGraph,
+      title,
+      description: project.description,
+      url: `/projects/${project.slug}`,
+    },
   };
 }
 
@@ -101,21 +114,6 @@ export default async function ProjectPage({ params }: Props) {
           </div>
         )}
       </header>
-
-      {/* 構想メモ（構想中プロジェクト用） */}
-      {project.concept && (
-        <section className="mb-12">
-          <h2 className="mb-5 text-xl font-bold tracking-tight">構想メモ</h2>
-          <ul className="space-y-3">
-            {project.concept.map((item) => (
-              <li key={item} className="flex gap-3 text-sm leading-relaxed">
-                <span className="mt-0.5 shrink-0 text-accent">💡</span>
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
 
       {/* 主な機能 */}
       {project.features && (

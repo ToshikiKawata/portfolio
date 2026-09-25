@@ -19,7 +19,11 @@ const skillGroups = [
   },
   {
     title: "その他",
-    items: ["Git / GitHub", "App Store 申請・公開"],
+    items: [
+      "Godot（GDScript）",
+      "Git / GitHub",
+      "App Store / Google Play 申請・公開",
+    ],
   },
 ];
 
@@ -37,7 +41,7 @@ export default function Home() {
         <p className="mt-6 leading-relaxed">
           業務ではOutSystemsを用いた業務システム開発に要件定義から携わり、個人では
           「あったらいいな」を形にするアプリを企画からストア公開まで一人で開発しています。
-          2026年にiOSアプリ「Typedex」をApp Storeで公開しました。
+          2026年にはiOS / Androidアプリ「Typedex」とiOSゲーム「Snake Ninja」をストアで公開しました。
         </p>
         <div className="mt-8 flex flex-wrap gap-3">
           <a
@@ -87,7 +91,7 @@ export default function Home() {
           プロジェクト
         </h2>
         <p className="mb-8 text-sm text-muted">
-          公開済みのものから構想段階のものまで、個人開発の全プロジェクト。カードを押すと詳細が見られます。
+          公開中・開発中の主な個人開発プロジェクト。カードを押すと詳細が見られます。
         </p>
         <div className="space-y-5">
           {projects.map((project) => (
@@ -197,31 +201,6 @@ export default function Home() {
           </ul>
         </section>
       )}
-
-      {/* Web制作の案内 */}
-      <section className="mb-20">
-        <Link
-          href="/services"
-          className="group block rounded-2xl border border-line bg-gradient-to-br from-accent-soft to-card p-8 transition-colors hover:border-accent"
-        >
-          <p className="text-xs font-semibold tracking-wide text-accent">
-            SERVICE
-          </p>
-          <h2 className="mt-2 text-xl font-bold tracking-tight sm:text-2xl">
-            LP・ホームページ制作、承ります
-          </h2>
-          <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted">
-            個人店舗・スモールビジネス向けに、企画からデザイン・公開まで一人で担当します。
-            デザインサンプルと料金の目安はこちら。
-          </p>
-          <span className="mt-4 inline-block text-sm font-medium text-accent">
-            詳しく見る{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1">
-              →
-            </span>
-          </span>
-        </Link>
-      </section>
 
       {/* Contact */}
       <section>
